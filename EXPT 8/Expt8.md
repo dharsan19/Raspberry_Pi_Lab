@@ -2,60 +2,49 @@
 ```python
 import RPi.GPIO as GPIO
 import time
-
-# Define the GPIO pins for the stepper motor
-IN1 = 17
-IN2 = 18
-IN3 = 27
-IN4 = 22
-
-# Define the step sequence
-SEQ = ['1010', '0110', '0101', '1001']
-
-# Set up the GPIO pins
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-GPIO.setup(IN1, GPIO.OUT)
-GPIO.setup(IN2, GPIO.OUT)
-GPIO.setup(IN3, GPIO.OUT)
-GPIO.setup(IN4, GPIO.OUT)
-
-# Define a function to set the motor winding sequence
-def set_sequence(seq):
-    GPIO.output(IN1, int(seq[0]))
-    GPIO.output(IN2, int(seq[1]))
-    GPIO.output(IN3, int(seq[2]))
-    GPIO.output(IN4, int(seq[3]))
-
-# Define a function to move the motor forward
-def move_forward(steps):
-    print("Moving forward...")
+GPIO.setmode(GPIO.BOARD)
+coil_A1_pin = 22
+coil_A2_pin = 24
+coil_B1_pin = 26
+coil_B2_pin = 28
+GPIO.setup(coil_A1_pin, GPIO.OUT)
+GPIO.setup(coil_A2_pin, GPIO.OUT)
+GPIO.setup(coil_B1_pin, GPIO.OUT)
+GPIO.setup(coil_B2_pin, GPIO.OUT)
+forward = ['1010', '0110', '0101', '1001']
+backward = ['1001', '0101', '0110', '1010']
+def forw(delay, steps):
     for i in range(steps):
-        for seq in SEQ:
-            set_sequence(seq)
-            time.sleep(0.01)
-
-# Define a function to move the motor in reverse
-def move_reverse(steps):
-    print("Moving in reverse...")
+        for step in forward:
+            print(step)
+            set_step(step)
+            time.sleep(delay)
+def back(delay, steps):
     for i in range(steps):
-        for seq in reversed(SEQ):
-            set_sequence(seq)
-            time.sleep(0.01)
-
-# Prompt the user for the direction and number of steps
-direction = input("Enter the direction (forward/reverse): ")
-steps = int(input("Enter the number of steps: "))
-
-# Move the motor in the specified direction
-if direction == "forward":
-    move_forward(steps)
-elif direction == "reverse":
-    move_reverse(steps)
-else:
-    print("Invalid direction")
-
-# Clean up the GPIO pins
-GPIO.cleanup()
-
+        for step in backward:
+            print(step)
+            set_step(step)
+            time.sleep(delay)
+def set_step(step):
+    GPIO.output(coil_A1_pin, step[0] == '1')
+    GPIO.output(coil_A2_pin, step[1] == '1')
+    GPIO.output(coil_B1_pin, step[2] == '1')
+    GPIO.output(coil_B2_pin, step[3] == '1')
+while(True):
+    choice = input("Enter your choice - Forward [F/f] -Backward [B/b] - Stop [S/s]: ")
+    if(choice == 'F' or choice == 'f'):
+        print("Forward Motion")
+        set_step('0000')
+        forw(1,2)
+        set_step('0000')
+        time.sleep(2)
+    if(choice == 'B' or choice == 'b'):
+        print("Backward Motion")
+        set_step('0000')
+        back(1,2)
+        set_step('0000')
+        time.sleep(2)
+    if(choice == 'S' or choice == 's'):
+        print("STOP!!!")
+        break
 ```
