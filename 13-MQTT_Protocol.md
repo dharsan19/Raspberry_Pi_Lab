@@ -1,4 +1,5 @@
-# DHARSAN S RA2011003010732
+## -Pushing Data to Thingsboard Open-source IoT Platform Using MQTT Protocol
+```py
 from time import sleep
 import paho.mqtt.client as mqtt 
 import json
@@ -18,3 +19,4 @@ while True:
     client.publish('v/devices/me/telemetry',json.dumps(sensor_data),1) 
     client.disconnect()
     sleep(10)  
+```

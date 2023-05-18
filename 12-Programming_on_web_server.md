@@ -1,5 +1,4 @@
-## To write a python program to display temperature, humidity, wind speed data and rain sensor data (rainy or not)  in a webpage(localhost)  using JSON format using bottle library (get sensor data from user and  which is coming from a sensor )
-
+## 1. To write a python program to display temperature, humidity, wind speed data and rain sensor data (rainy or not)  in a webpage(localhost)  using JSON format using bottle library (get sensor data from user and  which is coming from a sensor )
 ```py
 from bottle import route,run,request 
 tempr=input("enter the temperature value:") 
