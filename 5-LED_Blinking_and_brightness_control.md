@@ -1,16 +1,16 @@
-## LED Blinking
+## [LED Blinking](https://create.withcode.uk/python/MyK)
 ```py
 import time
-import RPi.GPIO as GPIO       ## Import GPIO library
-GPIO.setmode(GPIO.BOARD)      ## Use board pin numbering
-GPIO.setup(18, GPIO.OUT)      ## Setup GPIO Pin 11 to OUT
+import RPi.GPIO as GPIO       
+GPIO.setmode(GPIO.BOARD)      
+GPIO.setup(18, GPIO.OUT)      
 while True:
-	GPIO.output(18,True)  ## Turn on Led
-	time.sleep(2)         ## Wait for one second
-	GPIO.output(18,False) ## Turn off Led
-	time.sleep(2)         ## Wait for one second
+	GPIO.output(18,True) 
+	time.sleep(2)        
+	GPIO.output(18,False) 
+	time.sleep(2)        
 ```
-## Brightness Control
+## [Brightness Control](https://create.withcode.uk/python/MyM)
 ```py
 import time
 import RPi.GPIO as GPIO
@@ -33,7 +33,7 @@ pwm.stop()
 GPIO.cleanup()
 ```
 # POST LAB QUESTION
-## 2. Write python code in which LED  only make blinking with medium and highest brightness
+## [2. Write python code in which LED  only make blinking with medium and highest brightness](https://create.withcode.uk/python/MyN)
 ```py
 import RPi.GPIO as GPIO
 led_pin = 18
