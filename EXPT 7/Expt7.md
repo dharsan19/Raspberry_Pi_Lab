@@ -1,5 +1,0 @@
-# Programming on Interrupts
-
-```python
-
-```
